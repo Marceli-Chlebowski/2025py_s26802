@@ -1,18 +1,8 @@
 import random
 
-# Cel programu:
-# Program generuje losową sekwencję DNA, zapisuje ją w formacie FASTA
-# oraz wyświetla statystyki procentowe zawartości nukleotydów.
-# wszystkie modyfikacje maja swoj oddzielny branch na github do wyboru sa:
-# main
-# modyfikacja1
-# modyfikacja1+2
-# modyfikacja1+2+3
+# Cel programu: Generowanie i analiza losowej sekwencji DNA w formacie FASTA
 
 # MODYFIKACJA 1: Walidacja długości sekwencji
-# ORIGINAL:
-# seq_length = int(input("Podaj długość sekwencji: "))
-# MODIFIED (zapewnia poprawność danych wejściowych — dodatnia liczba całkowita):
 while True:
     try:
         seq_length = int(input("Podaj długość sekwencji: "))
@@ -22,7 +12,16 @@ while True:
     except ValueError:
         print("Podaj poprawną dodatnią liczbę całkowitą.")
 
-seq_id = input("Podaj ID sekwencji: ")
+# MODYFIKACJA 2: Walidacja ID sekwencji
+# ORIGINAL:
+# seq_id = input("Podaj ID sekwencji: ")
+# MODIFIED:
+while True:
+    seq_id = input("Podaj ID sekwencji (bez spacji): ").strip()
+    if seq_id and " " not in seq_id:
+        break
+    print("ID nie może być puste ani zawierać spacji.")
+
 description = input("Podaj opis sekwencji: ")
 name = input("Podaj imię: ")
 
