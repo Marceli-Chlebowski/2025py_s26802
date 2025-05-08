@@ -3,6 +3,11 @@ import random
 # Cel programu:
 # Program generuje losową sekwencję DNA, zapisuje ją w formacie FASTA
 # oraz wyświetla statystyki procentowe zawartości nukleotydów.
+# wszystkie modyfikacje maja swoj oddzielny branch na github do wyboru sa:
+# main
+# modyfikacja1
+# modyfikacja1+2
+# modyfikacja1+2+3
 
 # Pobranie danych od użytkownika
 seq_length = int(input("Podaj długość sekwencji: "))
