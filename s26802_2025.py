@@ -9,21 +9,29 @@ import random
 # modyfikacja1+2
 # modyfikacja1+2+3
 
-# Pobranie danych od użytkownika
-seq_length = int(input("Podaj długość sekwencji: "))
+# MODYFIKACJA 1: Walidacja długości sekwencji
+# ORIGINAL:
+# seq_length = int(input("Podaj długość sekwencji: "))
+# MODIFIED (zapewnia poprawność danych wejściowych — dodatnia liczba całkowita):
+while True:
+    try:
+        seq_length = int(input("Podaj długość sekwencji: "))
+        if seq_length <= 0:
+            raise ValueError
+        break
+    except ValueError:
+        print("Podaj poprawną dodatnią liczbę całkowitą.")
+
 seq_id = input("Podaj ID sekwencji: ")
 description = input("Podaj opis sekwencji: ")
 name = input("Podaj imię: ")
 
-# Generowanie losowej sekwencji DNA
 nucleotides = ['A', 'C', 'G', 'T']
 dna_seq = ''.join(random.choices(nucleotides, k=seq_length))
 
-# Wstawienie imienia użytkownika w losowe miejsce
 insert_index = random.randint(0, len(dna_seq))
 final_seq = dna_seq[:insert_index] + name + dna_seq[insert_index:]
 
-# Zapis do pliku FASTA
 filename = f"{seq_id}.fasta"
 with open(filename, 'w') as file:
     file.write(f">{seq_id} {description}\n")
@@ -31,7 +39,6 @@ with open(filename, 'w') as file:
 
 print(f"Sekwencja została zapisana do pliku {filename}")
 
-# Statystyki (bez imienia)
 count_A = dna_seq.count('A')
 count_C = dna_seq.count('C')
 count_G = dna_seq.count('G')
@@ -45,7 +52,6 @@ perc_T = (count_T / total) * 100
 
 cg_at_ratio = ((count_C + count_G) / (count_A + count_T)) * 100 if (count_A + count_T) != 0 else 0
 
-# Wyświetlenie statystyk
 print("Statystyki sekwencji:")
 print(f"A: {perc_A:.1f}%")
 print(f"C: {perc_C:.1f}%")
