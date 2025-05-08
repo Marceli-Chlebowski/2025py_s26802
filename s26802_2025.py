@@ -13,9 +13,6 @@ while True:
         print("Podaj poprawną dodatnią liczbę całkowitą.")
 
 # MODYFIKACJA 2: Walidacja ID sekwencji
-# ORIGINAL:
-# seq_id = input("Podaj ID sekwencji: ")
-# MODIFIED:
 while True:
     seq_id = input("Podaj ID sekwencji (bez spacji): ").strip()
     if seq_id and " " not in seq_id:
@@ -32,9 +29,17 @@ insert_index = random.randint(0, len(dna_seq))
 final_seq = dna_seq[:insert_index] + name + dna_seq[insert_index:]
 
 filename = f"{seq_id}.fasta"
+
+# MODYFIKACJA 3: Formatowanie FASTA po 60 znaków
+# ORIGINAL:
+# with open(filename, 'w') as file:
+#     file.write(f">{seq_id} {description}\n")
+#     file.write(final_seq + "\n")
+# MODIFIED:
 with open(filename, 'w') as file:
     file.write(f">{seq_id} {description}\n")
-    file.write(final_seq + "\n")
+    for i in range(0, len(final_seq), 60):
+        file.write(final_seq[i:i+60] + "\n")
 
 print(f"Sekwencja została zapisana do pliku {filename}")
 
